@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firewall – Cyber Security</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<button id="collapseBtn" class="collapse-btn">
+  <i class="fa-solid fa-bars"></i>
+</button>
+
+<header class="top-header">
+  <div class="logo">Cyber Eye</div>
+  <h1 class="header-title">
+    Firewall <span class="black-text">Security</span> Module
+  </h1>
+
+  <nav class="header-right">
+    <a class="nav-link" href="viewer.html">Docs</a>
+    
+    <div class="features-nav-container">
+      <a class="nav-link" href="#">Features <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+      <div class="neon-feature-box">
+        <div class="feature-item">
+          <i class="fa-solid fa-filter"></i>
+          <div class="feature-text">
+            <h4>Packet Filtering</h4>
+            <p>Analyzing data packets based on IP and ports.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div class="feature-text">
+            <h4>Proxy Service</h4>
+            <p>Acting as a gateway between users and internet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="login-btn" onclick="location.href='login.html'">Log out</button>
+  </nav>
+</header>
+
+<aside id="sideNav" class="side-nav closed">
+  <ul id="navList">
+    <li class="unlocked"><a href="home.html"><i class="fa-solid fa-book"></i> Introduction <span class="lock-status"><i class="fa-solid fa-lock-open"></i></span></a></li>
+    
+    <li class="locked"><a href="fundamentals.html"><i class="fa-solid fa-lightbulb"></i> Fundamentals <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="tutorials.html"><i class="fa-solid fa-chalkboard"></i> Services & Mechanism <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="iso.html"><i class="fa-solid fa-shield-halved"></i> ISO Security <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="firewall.html"><i class="fa-solid fa-fire"></i> Firewall <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="cipher.html"><i class="fa-solid fa-key"></i> Ciphers <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="network.html"><i class="fa-solid fa-network-wired"></i> Networks <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+  </ul>
+</aside>
+
+<main class="container" id="mainContainer">
+
+  <section class="visual-container">
+    
+    <img src="firewall.png" alt="Firewall Explanation Diagram" style="width:100%; border-radius:18px;">
+  </section>
+
+  <section>
+    <h2>Firewall Types</h2>
+    <div class="grid">
+      <div class="card" onclick="openDetail('packet')">Packet Filtering Firewall</div>
+      <div class="card" onclick="openDetail('stateful')">Stateful Inspection Firewall</div>
+      <div class="card" onclick="openDetail('proxy')">Proxy / Application Firewall</div>
+      <div class="card" onclick="openDetail('ngfw')">Next-Generation Firewall (NGFW)</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Deployment Models</h2>
+    <div class="grid">
+      <div class="card" onclick="openDetail('hardware')">Hardware Firewall</div>
+      <div class="card" onclick="openDetail('software')">Software Firewall</div>
+      <div class="card" onclick="openDetail('cloud')">Cloud Firewall (FWaaS)</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Firewall Filtering Methods</h2>
+    <div class="grid">
+      <div class="card" onclick="openDetail('rulebased')">Rule-Based Filtering</div>
+      <div class="card" onclick="openDetail('dpi')">Deep Packet Inspection</div>
+      <div class="card" onclick="openDetail('appcontrol')">Application Control</div>
+    </div>
+  </section>
+
+  <div id="expandedSection" class="expanded hidden"></div>
+
+</main>
+
+<footer class="cyber-footer-pro">
+  <div class="footer-overlay"></div>
+  <div class="footer-container">
+    
+    <div class="footer-main">
+      <div class="footer-col brand-col">
+        <h2 class="f-logo">Cyber <span>Eye</span></h2>
+        <p class="f-tagline">Providing high-quality cyber security education through our structured online course modules.</p>
+        <div class="system-status">
+          <div class="pulse-ring"></div>
+          <span class="status-text">Learning Portal Active</span>
+        </div>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Curriculum</h4>
+        <ul class="f-nav-list">
+          <li><a href="home.html"><i class="fa-solid fa-book-open"></i> Course Intro</a></li>
+          <li><a href="fundamentals.html"><i class="fa-solid fa-shield-halved"></i> Fundamentals</a></li>
+          <li><a href="tutorials.html"><i class="fa-solid fa-layer-group"></i> Services & Mechanism</a></li>
+          <li><a href="iso.html"><i class="fa-solid fa-check-double"></i> ISO Standards</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Specializations</h4>
+        <ul class="f-nav-list">
+          <li><a href="firewall.html"><i class="fa-solid fa-fire-shield"></i> Firewall Security</a></li>
+          <li><a href="cipher.html"><i class="fa-solid fa-user-lock"></i> Cryptography</a></li>
+          <li><a href="network.html"><i class="fa-solid fa-network-wired"></i> Network Defense</a></li>
+          <li><a href="viewer.html"><i class="fa-solid fa-file-pdf"></i> Study Material</a></li>
+        </ul>
+      </div>
+ <div class="footer-col team-col">
+        <h4>Project Developers</h4>
+        <div class="team-card">
+          <div class="member">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+              <h5>Ibtisam</h5>
+              <p>2024S-BCNS-015</p>
+            </div>
+          </div>
+          <div class="member">
+            <i class="fa-solid fa-user-tie"></i>
+            <div>
+              <h5>Ghousia Kiran</h5>
+              <p>2024S-BCNS-005</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+    <p class="f-bottom-links">
+        <a href="#">© 2025 Cyber Eye Online Courseware • Education for a Secure Future</a>
+    </p>
+    <div class="f-bottom-links">
+        <a href="mailto:2024S-BCNS-005@ssuet.edu.pk">Help Center</a>
+        <a href="mailto:2024S-BCNS-015@ssuet.edu.pk">Terms of Study</a>
+    </div>
+</div>
+
+</footer>
+
+<script>
+ window.onscroll = function() {
+    // 80% scroll check
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.8) {
+        
+        let path = window.location.pathname;
+        let page = path.split("/").pop() || "home.html";
+
+        // localStorage ki jagah sessionStorage use kiya hai taake session khatam hote hi lock ho jaye
+        if (page === "home.html") {
+            sessionStorage.setItem("fundamentals_unlocked", "true");
+        } else if (page === "fundamentals.html") {
+            sessionStorage.setItem("tutorials_unlocked", "true");
+        } else if (page === "tutorials.html") {
+            sessionStorage.setItem("iso_unlocked", "true");
+        } else if (page === "iso.html") {
+            sessionStorage.setItem("firewall_unlocked", "true");
+        } else if (page === "firewall.html") {
+            sessionStorage.setItem("cipher_unlocked", "true");
+        } else if (page === "cipher.html") {
+            sessionStorage.setItem("networks_unlocked", "true");
+        }
+        
+        updateNavLockStatus();
+    }
+};
+
+function updateNavLockStatus() {
+    const listItems = document.querySelectorAll("#navList li");
+    if (!listItems.length) return;
+
+    // Session se status check kar rha hai
+    if (sessionStorage.getItem("fundamentals_unlocked") === "true") {
+        unlockItem(listItems[1]);
+    }
+    if (sessionStorage.getItem("tutorials_unlocked") === "true") {
+        unlockItem(listItems[2]);
+    }
+    if (sessionStorage.getItem("iso_unlocked") === "true") {
+        unlockItem(listItems[3]);
+    }
+    if (sessionStorage.getItem("firewall_unlocked") === "true") {
+        unlockItem(listItems[4]);
+    }
+    if (sessionStorage.getItem("cipher_unlocked") === "true") {
+        unlockItem(listItems[5]);
+    }
+    if (sessionStorage.getItem("networks_unlocked") === "true") {
+        unlockItem(listItems[6]);
+    }
+}
+
+function unlockItem(element) {
+    if (element && element.classList.contains("locked")) {
+        element.classList.remove("locked");
+        element.classList.add("unlocked");
+        
+        const lockStatusSpan = element.querySelector(".lock-status");
+        if (lockStatusSpan) {
+            // innerHTML ke zariye lock icon change
+            lockStatusSpan.innerHTML = '<i class="fa-solid fa-lock-open"></i>';
+        }
+    }
+}
+
+// Page load hote hi status refresh karein
+document.addEventListener("DOMContentLoaded", updateNavLockStatus);
+  // --- 1. Selections & Initialization ---
+  const collapseBtn = document.getElementById("collapseBtn");
+  const sideNav = document.getElementById("sideNav");
+  // Check for all possible main container IDs across your pages
+  const mainContent = document.getElementById("content") || 
+                      document.getElementById("mainContainer") || 
+                      document.getElementById("mainContent");
+  const header = document.querySelector('.top-header');
+  const navLinks = document.querySelectorAll("#navList a");
+  let lastScroll = 0;
+
+  // --- 2. Professional Layout Engine ---
+  // Ye function sidebar aur content ki width/margin ko sync karta hai
+  function updateLayout() {
+    if (!mainContent) return; // Error preventer
+
+    if (window.innerWidth >= 820) {
+      if (sideNav.classList.contains("closed")) {
+        mainContent.style.marginLeft = "0";
+        mainContent.style.width = "100%";
+      } else {
+        mainContent.style.marginLeft = "var(--sidebar-width)";
+        mainContent.style.width = "calc(100% - var(--sidebar-width))";
+      }
+    } else {
+      // Mobile view logic
+      mainContent.style.marginLeft = "0";
+      mainContent.style.width = "100%";
+    }
+  }
+
+  // --- 3. Sidebar Toggle & Auto-Close Events ---
+  collapseBtn.addEventListener("click", () => {
+    sideNav.classList.toggle("closed");
+    updateLayout();
+  });
+
+  // Mobile navigation: Auto-close sidebar after clicking a link
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth < 820) {
+        sideNav.classList.add("closed");
+        updateLayout();
+      }
+    });
+  });
+
+  // Re-adjust layout if window is resized
+  window.addEventListener("resize", updateLayout);
+
+  // --- 4. Smart Header (Hide on Scroll) ---
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      header.classList.add('hide');
+    } else {
+      header.classList.remove('hide');
+    }
+    lastScroll = currentScroll;
+  });
+
+  // --- 5. Interactive Mouse Glow (Card FX) ---
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--x', `${e.clientX - r.left}px`);
+      card.style.setProperty('--y', `${e.clientY - r.top}px`);
+    });
+  });
+
+  // --- 6. The "Universal" openDetail Function ---
+  // Isme Fundamentals aur Firewall dono ka content maujood hai
+  function openDetail(key) {
+    const s = document.getElementById('expandedSection');
+    
+    const contentLibrary = {
+      // --- Fundamentals Module ---
+      conf: { t: 'Confidentiality', b: 'Protects data from unauthorized access...', v: 'confidentiality.mp4' },
+      integ: { t: 'Integrity', b: 'Ensures data is accurate and unaltered...', v: 'integrity.mp4' },
+      avail: { t: 'Availability', b: 'Keeps systems accessible whenever needed...', v: 'availability.mp4' },
+      
+      // --- Firewall Module ---
+    packet: { t: 'Packet Filtering', b: 'Checks source/destination IP and ports against security rules.', v: 'videos/packet.mp4' },
+    stateful: { t: 'Stateful Inspection', b: 'Monitors the state of active network connections for safety.', v: 'videos/stateful.mp4' },
+    proxy: { t: 'Proxy Firewall', b: 'Filters messages at the application layer to hide network identity.', v: 'videos/proxy.mp4' },
+    ngfw: { t: 'Next-Gen Firewall', b: 'Advanced protection including DPI and encrypted traffic inspection.', v: 'videos/ngfw.mp4' },
+    hardware: { t: 'Hardware Firewall', b: 'Physical security appliances placed between the network and gateway.', v: 'videos/hardware.mp4' },
+    software: { t: 'Software Firewall', b: 'Security applications installed on individual servers or devices.', v: 'videos/software.mp4' },
+    cloud: { t: 'Cloud Firewall (FWaaS)', b: 'Virtual security solutions hosted in the cloud for scalability.', v: 'videos/cloud.mp4' },
+    rulebased: { t: 'Rule-Based Filtering', b: 'Uses a set of administrator-defined rules (ACLs) to Allow or Deny specific traffic.', v: 'videos/rule.mp4' },
+    dpi: { t: 'Deep Packet Inspection', b: 'Examines the actual data payload of a packet to find and block hidden malware or threats.', v: 'videos/dpi.mp4' },
+    appcontrol: { t: 'Application Control', b: 'Identifies and restricts specific applications (like social media or P2P) regardless of port.', v: 'videos/appcontrol.mp4' }
+};
+
+    if (contentLibrary[key]) {
+      s.innerHTML = `
+        <span class="close-chat" style="float:right; cursor:pointer; font-size:24px;" onclick="this.parentElement.classList.add('hidden')">✖</span>
+        <h3 style="color:var(--accent); margin-bottom:15px;">${contentLibrary[key].t}</h3>
+        <pre style="white-space: pre-wrap; color: #ccc; font-family: inherit; line-height: 1.6; margin-bottom:15px;">${contentLibrary[key].b}</pre>
+        <video controls width="100%" style="border-radius:12px; border: 1px solid var(--accent);" autoplay muted loop>
+          <source src="${contentLibrary[key].v}" type="video/mp4">
+        </video>
+      `;
+      s.classList.remove('hidden');
+      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  // --- Initial Setup ---
+  updateLayout();
+</script>
+</body>
+</html>

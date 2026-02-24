@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Eye • Fundamentals</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+
+<button id="collapseBtn" class="collapse-btn">
+  <i class="fa-solid fa-bars"></i>
+</button>
+
+<header class="top-header">
+  <div class="logo">Cyber Eye</div>
+  <h1 class="header-title">Cyber <span class="black-text">Fundamentals</span></h1>
+  <nav class="header-right">
+    <a class="nav-link" href="viewer.html">Docs</a>
+    <button class="login-btn" onclick="location.href='login.html'">Log out</button>
+  </nav>
+</header>
+
+<aside id="sideNav" class="side-nav closed">
+  <ul id="navList">
+    <li class="unlocked"><a href="home.html"><i class="fa-solid fa-book"></i> Introduction <span class="lock-status"><i class="fa-solid fa-lock-open"></i></span></a></li>
+    
+    <li class="locked"><a href="fundamentals.html"><i class="fa-solid fa-lightbulb"></i> Fundamentals <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="tutorials.html"><i class="fa-solid fa-chalkboard"></i> Services & Mechanism <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="iso.html"><i class="fa-solid fa-shield-halved"></i> ISO Security <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="firewall.html"><i class="fa-solid fa-fire"></i> Firewall <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="cipher.html"><i class="fa-solid fa-key"></i> Ciphers <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="network.html"><i class="fa-solid fa-network-wired"></i> Networks <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+  </ul>
+</aside>
+
+<main class="content" id="content">
+
+  <section class="visual-container">
+    <img src="cia.png" alt="CIA Triad Diagram" style="width:100%; border-radius:18px;">
+  </section>
+  <br><br>
+
+  <section>
+    <h2>CIA Triad</h2>
+    <div class="grid">
+      <div class="card" onclick="openDetail('conf')">Confidentiality</div>
+      <div class="card" onclick="openDetail('integ')">Integrity</div>
+      <div class="card" onclick="openDetail('avail')">Availability</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cyber Attack Areas</h2>
+    <div class="grid">
+      <div class="card" onclick="openDetail('network')">Network Attacks</div>
+      <div class="card" onclick="openDetail('system')">System Attacks</div>
+      <div class="card" onclick="openDetail('application')">Application Attacks</div>
+      <div class="card" onclick="openDetail('user')">User-Based Attacks</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Malware Types</h2>
+    <div class="grid">
+      <div class="card" onclick="openDetail('virus')">Virus</div>
+      <div class="card" onclick="openDetail('worm')">Worm</div>
+      <div class="card" onclick="openDetail('trojan')">Trojan</div>
+      <div class="card" onclick="openDetail('ransom')">Ransomware</div>
+    </div>
+  </section>
+
+  <div id="expandedSection" class="expanded hidden"></div>
+
+</main>
+
+<footer class="cyber-footer-pro">
+  <div class="footer-overlay"></div>
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-col brand-col">
+        <h2 class="f-logo">Cyber <span>Eye</span></h2>
+        <p class="f-tagline">Providing high-quality cyber security education through our structured online course modules.</p>
+        <div class="system-status">
+          <div class="pulse-ring"></div>
+          <span class="status-text">Learning Portal Active</span>
+        </div>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Curriculum</h4>
+        <ul class="f-nav-list">
+          <li><a href="home.html"><i class="fa-solid fa-book-open"></i> Course Intro</a></li>
+          <li><a href="fundamentals.html"><i class="fa-solid fa-shield-halved"></i> Fundamentals</a></li>
+          <li><a href="tutorials.html"><i class="fa-solid fa-layer-group"></i> Services & Mechanism</a></li>
+          <li><a href="iso.html"><i class="fa-solid fa-check-double"></i> ISO Standards</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Specializations</h4>
+        <ul class="f-nav-list">
+          <li><a href="firewall.html"><i class="fa-solid fa-fire-shield"></i> Firewall Security</a></li>
+          <li><a href="cipher.html"><i class="fa-solid fa-user-lock"></i> Cryptography</a></li>
+          <li><a href="network.html"><i class="fa-solid fa-network-wired"></i> Network Defense</a></li>
+          <li><a href="viewer.html"><i class="fa-solid fa-file-pdf"></i> Study Material</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col team-col">
+        <h4>Project Developers</h4>
+        <div class="team-card">
+          <div class="member">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+              <h5>Ibtisam</h5>
+              <p>2024S-BCNS-015</p>
+            </div>
+          </div>
+          <div class="member">
+            <i class="fa-solid fa-user-tie"></i>
+            <div>
+              <h5>Ghousia Kiran</h5>
+              <p>2024S-BCNS-005</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <p class="f-bottom-links">
+        <a href="#">© 2025 Cyber Eye Online Courseware • Education for a Secure Future</a>
+      </p>
+      <div class="f-bottom-links">
+        <a href="mailto:2024S-BCNS-005@ssuet.edu.pk">Help Center</a>
+        <a href="mailto:2024S-BCNS-015@ssuet.edu.pk">Terms of Study</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+ window.onscroll = function() {
+    // 80% scroll check
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.8) {
+        
+        let path = window.location.pathname;
+        let page = path.split("/").pop() || "home.html";
+
+        // localStorage ki jagah sessionStorage use kiya hai taake session khatam hote hi lock ho jaye
+        if (page === "home.html") {
+            sessionStorage.setItem("fundamentals_unlocked", "true");
+        } else if (page === "fundamentals.html") {
+            sessionStorage.setItem("tutorials_unlocked", "true");
+        } else if (page === "tutorials.html") {
+            sessionStorage.setItem("iso_unlocked", "true");
+        } else if (page === "iso.html") {
+            sessionStorage.setItem("firewall_unlocked", "true");
+        } else if (page === "firewall.html") {
+            sessionStorage.setItem("cipher_unlocked", "true");
+        } else if (page === "cipher.html") {
+            sessionStorage.setItem("networks_unlocked", "true");
+        }
+        
+        updateNavLockStatus();
+    }
+};
+
+function updateNavLockStatus() {
+    const listItems = document.querySelectorAll("#navList li");
+    if (!listItems.length) return;
+
+    // Session se status check kar rha hai
+    if (sessionStorage.getItem("fundamentals_unlocked") === "true") {
+        unlockItem(listItems[1]);
+    }
+    if (sessionStorage.getItem("tutorials_unlocked") === "true") {
+        unlockItem(listItems[2]);
+    }
+    if (sessionStorage.getItem("iso_unlocked") === "true") {
+        unlockItem(listItems[3]);
+    }
+    if (sessionStorage.getItem("firewall_unlocked") === "true") {
+        unlockItem(listItems[4]);
+    }
+    if (sessionStorage.getItem("cipher_unlocked") === "true") {
+        unlockItem(listItems[5]);
+    }
+    if (sessionStorage.getItem("networks_unlocked") === "true") {
+        unlockItem(listItems[6]);
+    }
+}
+
+function unlockItem(element) {
+    if (element && element.classList.contains("locked")) {
+        element.classList.remove("locked");
+        element.classList.add("unlocked");
+        
+        const lockStatusSpan = element.querySelector(".lock-status");
+        if (lockStatusSpan) {
+            // innerHTML ke zariye lock icon change
+            lockStatusSpan.innerHTML = '<i class="fa-solid fa-lock-open"></i>';
+        }
+    }
+}
+
+// Page load hote hi status refresh karein
+document.addEventListener("DOMContentLoaded", updateNavLockStatus);
+  // --- 1. Selections ---
+  const collapseBtn = document.getElementById("collapseBtn");
+  const sideNav = document.getElementById("sideNav");
+  const mainContent = document.getElementById("content"); // Matches <main id="content">
+  const header = document.querySelector('.top-header');
+  const navLinks = document.querySelectorAll("#navList a");
+  let lastScroll = 0;
+
+  // --- 2. Layout Helper Function ---
+  function updateLayout() {
+    if (window.innerWidth >= 820) {
+      if (sideNav.classList.contains("closed")) {
+        mainContent.style.marginLeft = "0";
+        mainContent.style.width = "100%";
+      } else {
+        mainContent.style.marginLeft = "var(--sidebar-width)";
+        mainContent.style.width = "calc(100% - var(--sidebar-width))";
+      }
+    } else {
+      mainContent.style.marginLeft = "0";
+      mainContent.style.width = "100%";
+    }
+  }
+
+  // --- 3. Sidebar Toggle & Responsive Events ---
+  collapseBtn.addEventListener("click", () => {
+    sideNav.classList.toggle("closed");
+    updateLayout();
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth < 820) {
+        sideNav.classList.add("closed");
+        updateLayout();
+      }
+    });
+  });
+
+  window.addEventListener("resize", updateLayout);
+
+  // --- 4. Header Scroll Logic ---
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      header.classList.add('hide');
+    } else {
+      header.classList.remove('hide');
+    }
+    lastScroll = currentScroll;
+  });
+
+  // --- 5. Mouse Glow Effect ---
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--x', `${e.clientX - r.left}px`);
+      card.style.setProperty('--y', `${e.clientY - r.top}px`);
+    });
+  });
+
+  // --- 6. Expandable Detail Section ---
+  function openDetail(key) {
+    const s = document.getElementById('expandedSection');
+    const c = {
+      conf: { t: 'Confidentiality', b: 'Protects data from unauthorized access...', v: 'confidentiality.mp4' },
+      integ: { t: 'Integrity', b: 'Ensures data is accurate, reliable, and unaltered...', v: 'integrity.mp4' },
+      avail: { t: 'Availability', b: 'Keeps systems and data accessible whenever needed...', v: 'availability.mp4' },
+      network: { t: 'Network Attacks', b: 'Attacks targeting data as it moves over a network...', v: 'network.mp4' },
+      system: { t: 'System Attacks', b: 'Targets the operating system or hardware...', v: 'system.mp4' },
+      application: { t: 'Application Attacks', b: 'Exploits weaknesses or bugs in software...', v: 'application.mp4' },
+      user: { t: 'User-Based Attacks', b: 'Targets humans (Phishing, Social Engineering)...', v: 'user.mp4' },
+      virus: { t: 'Virus', b: 'Needs user action to spread and damage files...', v: 'virus.mp4' },
+      worm: { t: 'Worm', b: 'Self-spreading malware that consumes bandwidth...', v: 'worm.mp4' },
+      trojan: { t: 'Trojan', b: 'Legitimate-looking software with malicious intent...', v: 'trojan.mp4' },
+      ransom: { t: 'Ransomware', b: 'Locks files and demands payment for the key...', v: 'ransomware.mp4' }
+    };
+
+    if (c[key]) {
+      s.innerHTML = `
+        <span class="close-chat" style="float:right; cursor:pointer; font-size:22px;" onclick="this.parentElement.classList.add('hidden')">✖</span>
+        <h3>${c[key].t}</h3>
+        <pre style="white-space: pre-wrap; color: #ccc; font-family: inherit; line-height: 1.5;">${c[key].b}</pre>
+        <video controls width="100%" style="border-radius:12px; margin-top:15px;" autoplay muted loop>
+          <source src="${c[key].v}" type="video/mp4">
+        </video>
+      `;
+      s.classList.remove('hidden');
+      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  // Initial call to set correct layout
+  updateLayout();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Eye • Cipher Lab</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="home.css">
+
+<style>
+/* GRID CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1rem;
+  margin-top:2rem;
+}
+.card{
+  background:#181818;
+  padding:1rem;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.3s;
+  border:1px solid rgba(255,255,255,.03);
+}
+.card:hover{
+  transform:translateY(-6px) scale(1.03);
+  box-shadow:0 10px 25px rgba(0,230,168,.25);
+}
+.card h3{color:#00e6a8; margin-bottom:0.5rem;}
+.card p{color:#ccc; font-size:14px;}
+.expanded{
+  background:#1e1e1e;
+  padding:1rem;
+  border-radius:12px;
+  margin-top:1rem;
+  animation:expand .4s ease;
+}
+.hidden{display:none;}
+
+/* CRYPTO TOOL */
+.crypto-box{
+  background:var(--panel);
+  border-radius:14px;
+  padding:20px;
+  max-width:900px;
+  margin:30px auto;
+  box-shadow:0 0 25px rgba(0,0,0,.4);
+}
+.crypto-box h2{color:var(--accent); margin-bottom:10px;}
+.crypto-box textarea, .crypto-box select, .crypto-box input{
+  width:100%; margin-top:10px; padding:12px; border-radius:10px; border:1px solid #333; background:#0d0d0d; color:#fff;
+}
+.crypto-actions{
+  display:flex; gap:12px; margin-top:15px;
+}
+.crypto-actions button{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+}
+.result{
+  margin-top:15px;
+  background:#050505;
+  padding:12px;
+  border-radius:10px;
+  word-break:break-word;
+}
+#keyInfo{margin-top:10px; color:#ccc;}
+</style>
+</head>
+<body>
+
+<header class="top-header">
+  <div class="logo">Cyber Eye</div>
+
+  <h1 class="header-title">
+    Cipher & <span class="black-text">Cryptography</span> Module
+  </h1>
+
+  <nav class="header-right">
+    <a class="nav-link" href="viewer.html">Docs</a>
+    
+    <div class="features-nav-container">
+      <a class="nav-link" href="#">Features <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+      
+      <div class="neon-feature-box">
+        <div class="feature-item">
+          <i class="fa-solid fa-key"></i>
+          <div class="feature-text">
+            <h4>Symmetric Key</h4>
+            <p>Using a single key for encryption and decryption.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-lock-open"></i>
+          <div class="feature-text">
+            <h4>Asymmetric Encryption</h4>
+            <p>Using public and private keys (RSA algorithm).</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-hashtag"></i>
+          <div class="feature-text">
+            <h4>Hashing</h4>
+            <p>Creating fixed-size fingerprints of your data.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="login-btn" onclick="location.href='login.html'">Log out</button>
+    
+    <button id="toggleNav" class="collapse-btn">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+</header>
+
+<button id="collapseBtn" class="collapse-btn"><i class="fa-solid fa-bars"></i></button>
+<aside id="sideNav" class="side-nav closed">
+  <ul id="navList">
+    <li class="unlocked"><a href="home.html"><i class="fa-solid fa-book"></i> Introduction <span class="lock-status"><i class="fa-solid fa-lock-open"></i></span></a></li>
+    
+    <li class="locked"><a href="fundamentals.html"><i class="fa-solid fa-lightbulb"></i> Fundamentals <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="tutorials.html"><i class="fa-solid fa-chalkboard"></i> Services & Mechanism <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="iso.html"><i class="fa-solid fa-shield-halved"></i> ISO Security <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="firewall.html"><i class="fa-solid fa-fire"></i> Firewall <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="cipher.html"><i class="fa-solid fa-key"></i> Ciphers <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="network.html"><i class="fa-solid fa-network-wired"></i> Networks <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+  </ul>
+</aside>
+
+<main class="content">
+<p>Click a cipher card to see instructions and examples below, then try encryption/decryption.</p>
+
+<div class="grid">
+  <!-- Cards same as before -->
+  <div class="card" data-algo="caesar">
+    <h3><i class="fa-solid fa-book"></i> Caesar Cipher</h3>
+    <p>Shift letters by a number (classic cipher)</p>
+    <div class="expanded hidden">
+      <b>Instructions:</b><br>
+      Key: number (e.g., 3)<br>
+      Plain text: letters only<br>
+      Example: HELLO → KHOOR
+    </div>
+  </div>
+
+  <div class="card" data-algo="aes">
+    <h3><i class="fa-solid fa-lock"></i> AES</h3>
+    <p>Modern symmetric cipher</p>
+    <div class="expanded hidden">
+      <b>Instructions:</b><br>
+      Key: 16/24/32 chars<br>
+      Plain text: any length<br>
+      Example: CyberEye2025, Key: mysecretkey1234 → Base64 cipher
+    </div>
+  </div>
+
+  <div class="card" data-algo="des">
+    <h3><i class="fa-solid fa-key"></i> Simplified DES (Demo)</h3>
+    <p>Educational symmetric cipher demo</p>
+    <div class="expanded hidden">
+      <b>Instructions:</b><br>
+      Key: 8 chars (demo)<br>
+      Plain text: max 32 chars<br>
+      Example: HELLODES, Key: 12345678 → Base64 demo string
+    </div>
+  </div>
+
+  <div class="card" data-algo="rsa">
+    <h3><i class="fa-solid fa-user-secret"></i> RSA (Demo)</h3>
+    <p>Asymmetric cipher (public/private)</p>
+    <div class="expanded hidden">
+      <b>Instructions:</b><br>
+      Public key: for encryption<br>
+      Private key: for decryption<br>
+      Plain text: any length<br>
+      Example: HELLO → reversed + Base64
+    </div>
+  </div>
+</div>
+
+<!-- Crypto Tool -->
+<div class="crypto-box">
+<h2>Encryption / Decryption Tool</h2>
+<select id="algoSelect">
+  <option value="">Select Cipher</option>
+  <option value="caesar">Caesar Cipher</option>
+  <option value="aes">AES</option>
+  <option value="des">Simplified DES</option>
+  <option value="rsa">RSA (Demo)</option>
+</select>
+<input type="text" id="keyInput" placeholder="Enter Key / Password">
+<textarea id="inputText" rows="4" placeholder="Enter Plain or Cipher Text"></textarea>
+<div class="crypto-actions">
+  <button onclick="encrypt()">Encrypt</button>
+  <button onclick="decrypt()">Decrypt</button>
+</div>
+<div class="result" id="output"></div>
+<div id="keyInfo"></div>
+</div>
+
+</main>
+
+<footer class="cyber-footer-pro">
+  <div class="footer-overlay"></div>
+  <div class="footer-container">
+    
+    <div class="footer-main">
+      <div class="footer-col brand-col">
+        <h2 class="f-logo">Cyber <span>Eye</span></h2>
+        <p class="f-tagline">Providing high-quality cyber security education through our structured online course modules.</p>
+        <div class="system-status">
+          <div class="pulse-ring"></div>
+          <span class="status-text">Learning Portal Active</span>
+        </div>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Curriculum</h4>
+        <ul class="f-nav-list">
+          <li><a href="home.html"><i class="fa-solid fa-book-open"></i> Course Intro</a></li>
+          <li><a href="fundamentals.html"><i class="fa-solid fa-shield-halved"></i> Fundamentals</a></li>
+          <li><a href="tutorials.html"><i class="fa-solid fa-layer-group"></i> Services & Mechanism</a></li>
+          <li><a href="iso.html"><i class="fa-solid fa-check-double"></i> ISO Standards</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Specializations</h4>
+        <ul class="f-nav-list">
+          <li><a href="firewall.html"><i class="fa-solid fa-fire-shield"></i> Firewall Security</a></li>
+          <li><a href="cipher.html"><i class="fa-solid fa-user-lock"></i> Cryptography</a></li>
+          <li><a href="network.html"><i class="fa-solid fa-network-wired"></i> Network Defense</a></li>
+          <li><a href="viewer.html"><i class="fa-solid fa-file-pdf"></i> Study Material</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col team-col">
+        <h4>Project Developers</h4>
+        <div class="team-card">
+          <div class="member">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+              <h5>Ibtisam</h5>
+              <p>2024S-BCNS-015</p>
+            </div>
+          </div>
+          <div class="member">
+            <i class="fa-solid fa-user-tie"></i>
+            <div>
+              <h5>Ghousia Kiran</h5>
+              <p>2024S-BCNS-005</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+    <p class="f-bottom-links">
+        <a href="#">© 2025 Cyber Eye Online Courseware • Education for a Secure Future</a>
+    </p>
+    <div class="f-bottom-links">
+        <a href="mailto:2024S-BCNS-005@ssuet.edu.pk">Help Center</a>
+        <a href="mailto:2024S-BCNS-015@ssuet.edu.pk">Terms of Study</a>
+    </div>
+</div>
+</footer>
+
+<script>
+  window.onscroll = function() {
+    // 80% scroll check
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.8) {
+        
+        let path = window.location.pathname;
+        let page = path.split("/").pop() || "home.html";
+
+        // localStorage ki jagah sessionStorage use kiya hai taake session khatam hote hi lock ho jaye
+        if (page === "home.html") {
+            sessionStorage.setItem("fundamentals_unlocked", "true");
+        } else if (page === "fundamentals.html") {
+            sessionStorage.setItem("tutorials_unlocked", "true");
+        } else if (page === "tutorials.html") {
+            sessionStorage.setItem("iso_unlocked", "true");
+        } else if (page === "iso.html") {
+            sessionStorage.setItem("firewall_unlocked", "true");
+        } else if (page === "firewall.html") {
+            sessionStorage.setItem("cipher_unlocked", "true");
+        } else if (page === "cipher.html") {
+            sessionStorage.setItem("networks_unlocked", "true");
+        }
+        
+        updateNavLockStatus();
+    }
+};
+
+function updateNavLockStatus() {
+    const listItems = document.querySelectorAll("#navList li");
+    if (!listItems.length) return;
+
+    // Session se status check kar rha hai
+    if (sessionStorage.getItem("fundamentals_unlocked") === "true") {
+        unlockItem(listItems[1]);
+    }
+    if (sessionStorage.getItem("tutorials_unlocked") === "true") {
+        unlockItem(listItems[2]);
+    }
+    if (sessionStorage.getItem("iso_unlocked") === "true") {
+        unlockItem(listItems[3]);
+    }
+    if (sessionStorage.getItem("firewall_unlocked") === "true") {
+        unlockItem(listItems[4]);
+    }
+    if (sessionStorage.getItem("cipher_unlocked") === "true") {
+        unlockItem(listItems[5]);
+    }
+    if (sessionStorage.getItem("networks_unlocked") === "true") {
+        unlockItem(listItems[6]);
+    }
+}
+
+function unlockItem(element) {
+    if (element && element.classList.contains("locked")) {
+        element.classList.remove("locked");
+        element.classList.add("unlocked");
+        
+        const lockStatusSpan = element.querySelector(".lock-status");
+        if (lockStatusSpan) {
+            // innerHTML ke zariye lock icon change
+            lockStatusSpan.innerHTML = '<i class="fa-solid fa-lock-open"></i>';
+        }
+    }
+}
+
+// Page load hote hi status refresh karein
+document.addEventListener("DOMContentLoaded", updateNavLockStatus);
+// --- 1. KEY HELPERS ---
+// AES ko 16 bytes ki key chahiye hoti hai, ye function key ko sahi karta hai
+function getPaddedKey(key) {
+    let k = key.padEnd(16, '0').slice(0, 16); 
+    return new TextEncoder().encode(k);
+}
+
+// --- 2. CIPHER ALGORITHMS ---
+
+// CAESAR CIPHER (Sahi Math Logic)
+function caesar(text, shift, encrypt = true) {
+    const s = encrypt ? shift : -shift;
+    return text.split('').map(c => {
+        if (c.match(/[a-z]/i)) {
+            const code = c.charCodeAt(0);
+            const base = (code >= 97) ? 97 : 65;
+            return String.fromCharCode(((code - base + s + 26) % 26) + base);
+        }
+        return c;
+    }).join('');
+}
+
+// AES (Modern Encryption - Web Crypto API)
+async function aesEncrypt(text, key) {
+    try {
+        const enc = new TextEncoder();
+        const keyData = getPaddedKey(key);
+        const k = await crypto.subtle.importKey("raw", keyData, "AES-GCM", false, ["encrypt"]);
+        const iv = crypto.getRandomValues(new Uint8Array(12)); 
+        const data = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, k, enc.encode(text));
+        
+        const combined = new Uint8Array(iv.length + data.byteLength);
+        combined.set(iv);
+        combined.set(new Uint8Array(data), iv.length);
+        return btoa(String.fromCharCode(...combined));
+    } catch (e) { return "Encryption Error!"; }
+}
+
+async function aesDecrypt(text, key) {
+    try {
+        const raw = atob(text);
+        const combined = new Uint8Array([...raw].map(c => c.charCodeAt(0)));
+        const iv = combined.slice(0, 12);
+        const data = combined.slice(12);
+        const keyData = getPaddedKey(key);
+        const k = await crypto.subtle.importKey("raw", keyData, "AES-GCM", false, ["decrypt"]);
+        const dec = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, k, data);
+        return new TextDecoder().decode(dec);
+    } catch (e) { return "Invalid Key or Data!"; }
+}
+
+// S-DES & RSA (Educational Demo Logic)
+// Note: Real RSA/DES browser mein bina libraries ke bahut complex hote hain, 
+// isliye humne demo ke liye custom base64-reverse logic rakha hai.
+function demoEncrypt(text, key = "") {
+    return btoa(text.split('').reverse().join('') + (key ? "_" + key : ""));
+}
+
+function demoDecrypt(text) {
+    try {
+        let decoded = atob(text);
+        if(decoded.includes("_")) decoded = decoded.split("_")[0];
+        return decoded.split('').reverse().join('');
+    } catch(e) { return "Invalid Data!"; }
+}
+
+// --- 3. MAIN TOOL ACTIONS ---
+
+async function encrypt() {
+    const algo = document.getElementById("algoSelect").value;
+    const text = document.getElementById("inputText").value;
+    const key = document.getElementById("keyInput").value;
+    const output = document.getElementById("output");
+
+    if (!text) { alert("Enter text first!"); return; }
+
+    let result = "";
+    if (algo === "caesar") result = caesar(text, parseInt(key) || 3, true);
+    else if (algo === "aes") result = await aesEncrypt(text, key);
+    else if (algo === "des" || algo === "rsa") result = demoEncrypt(text, key);
+    else { alert("Select a Cipher!"); return; }
+
+    output.innerText = result;
+}
+
+async function decrypt() {
+    const algo = document.getElementById("algoSelect").value;
+    const text = document.getElementById("inputText").value;
+    const key = document.getElementById("keyInput").value;
+    const output = document.getElementById("output");
+
+    if (!text) { alert("Enter text first!"); return; }
+
+    let result = "";
+    if (algo === "caesar") result = caesar(text, parseInt(key) || 3, false);
+    else if (algo === "aes") result = await aesDecrypt(text, key);
+    else if (algo === "des" || algo === "rsa") result = demoDecrypt(text);
+    else { alert("Select a Cipher!"); return; }
+
+    output.innerText = result;
+}
+
+// --- 4. UI & SIDEBAR LOGIC ---
+
+// Sidebar Toggle
+document.getElementById("collapseBtn").onclick = () => {
+    document.getElementById("sideNav").classList.toggle("closed");
+};
+
+// Card Expansion & Dropdown Sync
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+        const exp = card.querySelector(".expanded");
+        const isHidden = exp.classList.contains("hidden");
+
+        document.querySelectorAll(".expanded").forEach(el => el.classList.add("hidden"));
+        
+        if (isHidden) {
+            exp.classList.remove("hidden");
+            const algo = card.dataset.algo;
+            document.getElementById("algoSelect").value = algo;
+            updateKeyInfo(algo);
+        }
+    });
+});
+
+function updateKeyInfo(algo) {
+    const info = document.getElementById("keyInfo");
+    const hints = {
+        "caesar": "Key: Enter a number (e.g., 3 for C)",
+        "aes": "Key: Use any text (Auto-padded to 16 chars)",
+        "des": "Demo Mode: Key used for salt",
+        "rsa": "Demo Mode: Public/Private logic simulation"
+    };
+    info.innerText = hints[algo] || "";
+}
+
+// Initial Load
+document.addEventListener("DOMContentLoaded", updateNavLockStatus);
+</script>
+
+</body>
+</html>

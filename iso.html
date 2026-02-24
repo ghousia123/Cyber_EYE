@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISO Cybersecurity Standards</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<header class="top-header">
+  <div class="logo">Cyber Eye</div>
+
+  <h1 class="header-title">
+    ISO <span class="black-text">Cybersecurity</span> Standards
+  </h1>
+
+  <nav class="header-right">
+    <a class="nav-link" href="viewer.html">Docs</a>
+    
+    <div class="features-nav-container">
+      <a class="nav-link" href="#">Features <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+      
+      <div class="neon-feature-box">
+        <div class="feature-item">
+          <i class="fa-solid fa-file-contract"></i>
+          <div class="feature-text">
+            <h4>ISO/IEC 27001</h4>
+            <p>International standard for information security management.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <div class="feature-text">
+            <h4>Compliance Audit</h4>
+            <p>Verifying that security controls meet legal requirements.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-globe"></i>
+          <div class="feature-text">
+            <h4>Global Frameworks</h4>
+            <p>Implementing worldwide recognized security protocols.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="login-btn" onclick="location.href='login.html'">Log out</button>
+    
+    <button id="toggleNav" class="collapse-btn">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+</header>
+
+<!-- SIDEBAR TOGGLE -->
+<button id="collapseBtn" class="collapse-btn">
+  <i class="fa-solid fa-bars"></i>
+</button>
+
+<!-- SIDE NAVIGATION -->
+<aside id="sideNav" class="side-nav closed">
+  <ul id="navList">
+    <li class="unlocked"><a href="home.html"><i class="fa-solid fa-book"></i> Introduction <span class="lock-status"><i class="fa-solid fa-lock-open"></i></span></a></li>
+    
+    <li class="locked"><a href="fundamentals.html"><i class="fa-solid fa-lightbulb"></i> Fundamentals <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="tutorials.html"><i class="fa-solid fa-chalkboard"></i> Services & Mechanism <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="iso.html"><i class="fa-solid fa-shield-halved"></i> ISO Security <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="firewall.html"><i class="fa-solid fa-fire"></i> Firewall <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="cipher.html"><i class="fa-solid fa-key"></i> Ciphers <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+    
+    <li class="locked"><a href="network.html"><i class="fa-solid fa-network-wired"></i> Networks <span class="lock-status"><i class="fa-solid fa-lock"></i></span></a></li>
+  </ul>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+  <section class="hero">
+    <p>
+      Explore ISO/IEC cybersecurity standards and best practices. Learn about
+      risk management, information security, controls, and compliance with
+      interactive cards and modern design.
+    </p>
+  </section>
+
+  <section class="video-section">
+    <h2>Introduction Video</h2>
+    <video controls>
+      <source src="iso.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section class="cards">
+    <article class="card">
+      <div class="ribbon-card">ISO 27001</div>
+      <i class="fa-solid fa-shield-halved"></i>
+      <h3>Information Security Management</h3>
+      <p>Framework to manage information security risks and ensure confidentiality, integrity, and availability of data.</p>
+    </article>
+
+    <article class="card">
+      <div class="ribbon-card">ISO 27002</div>
+      <i class="fa-solid fa-lock"></i>
+      <h3>Security Controls</h3>
+      <p>Detailed guidelines and controls for establishing, implementing, and maintaining information security management practices.</p>
+    </article>
+
+    <article class="card">
+      <div class="ribbon-card">ISO 27005</div>
+      <i class="fa-solid fa-exclamation-triangle"></i>
+      <h3>Risk Management</h3>
+      <p>Identify, assess, and mitigate information security risks in accordance with organizational objectives and compliance.</p>
+    </article>
+
+    <article class="card">
+      <div class="ribbon-card">ISO 27701</div>
+      <i class="fa-solid fa-user-secret"></i>
+      <h3>Privacy & PIMS</h3>
+      <p>Extends ISO 27001 for privacy management, protecting personal data, and GDPR compliance.</p>
+    </article>
+
+    <article class="card">
+      <div class="ribbon-card">ISO 22301</div>
+      <i class="fa-solid fa-server"></i>
+      <h3>Business Continuity</h3>
+      <p>Framework for planning and preparing business continuity and disaster recovery measures.</p>
+    </article>
+
+    <article class="card">
+      <div class="ribbon-card">ISO 31000</div>
+      <i class="fa-solid fa-network-wired"></i>
+      <h3>Enterprise Risk Management</h3>
+      <p>Standard provides principles and guidelines for risk management applicable across organizations.</p>
+    </article>
+  </section>
+
+</main>
+
+<footer class="cyber-footer-pro">
+  <div class="footer-overlay"></div>
+  <div class="footer-container">
+    
+    <div class="footer-main">
+      <div class="footer-col brand-col">
+        <h2 class="f-logo">Cyber <span>Eye</span></h2>
+        <p class="f-tagline">Providing high-quality cyber security education through our structured online course modules.</p>
+        <div class="system-status">
+          <div class="pulse-ring"></div>
+          <span class="status-text">Learning Portal Active</span>
+        </div>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Curriculum</h4>
+        <ul class="f-nav-list">
+          <li><a href="home.html"><i class="fa-solid fa-book-open"></i> Course Intro</a></li>
+          <li><a href="fundamentals.html"><i class="fa-solid fa-shield-halved"></i> Fundamentals</a></li>
+          <li><a href="tutorials.html"><i class="fa-solid fa-layer-group"></i> Services & Mechanism</a></li>
+          <li><a href="iso.html"><i class="fa-solid fa-check-double"></i> ISO Standards</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Specializations</h4>
+        <ul class="f-nav-list">
+          <li><a href="firewall.html"><i class="fa-solid fa-fire-shield"></i> Firewall Security</a></li>
+          <li><a href="cipher.html"><i class="fa-solid fa-user-lock"></i> Cryptography</a></li>
+          <li><a href="network.html"><i class="fa-solid fa-network-wired"></i> Network Defense</a></li>
+          <li><a href="viewer.html"><i class="fa-solid fa-file-pdf"></i> Study Material</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col team-col">
+        <h4>Project Developers</h4>
+        <div class="team-card">
+          <div class="member">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div>
+              <h5>Ibtisam</h5>
+              <p>2024S-BCNS-015</p>
+            </div>
+          </div>
+          <div class="member">
+            <i class="fa-solid fa-user-tie"></i>
+            <div>
+              <h5>Ghousia Kiran</h5>
+              <p>2024S-BCNS-005</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+    <p class="f-bottom-links">
+        <a href="#">© 2025 Cyber Eye Online Courseware • Education for a Secure Future</a>
+    </p>
+    <div class="f-bottom-links">
+        <a href="mailto:2024S-BCNS-005@ssuet.edu.pk">Help Center</a>
+        <a href="mailto:2024S-BCNS-015@ssuet.edu.pk">Terms of Study</a>
+    </div>
+</div>
+</footer>
+
+<script>
+ 
+window.onscroll = function() {
+    // 80% scroll check
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.8) {
+        
+        let path = window.location.pathname;
+        let page = path.split("/").pop() || "home.html";
+
+        // localStorage ki jagah sessionStorage use kiya hai taake session khatam hote hi lock ho jaye
+        if (page === "home.html") {
+            sessionStorage.setItem("fundamentals_unlocked", "true");
+        } else if (page === "fundamentals.html") {
+            sessionStorage.setItem("tutorials_unlocked", "true");
+        } else if (page === "tutorials.html") {
+            sessionStorage.setItem("iso_unlocked", "true");
+        } else if (page === "iso.html") {
+            sessionStorage.setItem("firewall_unlocked", "true");
+        } else if (page === "firewall.html") {
+            sessionStorage.setItem("cipher_unlocked", "true");
+        } else if (page === "cipher.html") {
+            sessionStorage.setItem("networks_unlocked", "true");
+        }
+        
+        updateNavLockStatus();
+    }
+};
+
+function updateNavLockStatus() {
+    const listItems = document.querySelectorAll("#navList li");
+    if (!listItems.length) return;
+
+    // Session se status check kar rha hai
+    if (sessionStorage.getItem("fundamentals_unlocked") === "true") {
+        unlockItem(listItems[1]);
+    }
+    if (sessionStorage.getItem("tutorials_unlocked") === "true") {
+        unlockItem(listItems[2]);
+    }
+    if (sessionStorage.getItem("iso_unlocked") === "true") {
+        unlockItem(listItems[3]);
+    }
+    if (sessionStorage.getItem("firewall_unlocked") === "true") {
+        unlockItem(listItems[4]);
+    }
+    if (sessionStorage.getItem("cipher_unlocked") === "true") {
+        unlockItem(listItems[5]);
+    }
+    if (sessionStorage.getItem("networks_unlocked") === "true") {
+        unlockItem(listItems[6]);
+    }
+}
+
+function unlockItem(element) {
+    if (element && element.classList.contains("locked")) {
+        element.classList.remove("locked");
+        element.classList.add("unlocked");
+        
+        const lockStatusSpan = element.querySelector(".lock-status");
+        if (lockStatusSpan) {
+            // innerHTML ke zariye lock icon change
+            lockStatusSpan.innerHTML = '<i class="fa-solid fa-lock-open"></i>';
+        }
+    }
+}
+
+// Page load hote hi status refresh karein
+document.addEventListener("DOMContentLoaded", updateNavLockStatus);
+  let lastScroll = 0;
+const header = document.querySelector('.top-header');
+
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+
+  if (currentScroll > lastScroll && currentScroll > 80) {
+    // scroll down → hide
+    header.classList.add('hide');
+  } else {
+    // scroll up → show
+    header.classList.remove('hide');
+  }
+
+  lastScroll = currentScroll;
+});
+
+const collapseBtn = document.getElementById("collapseBtn");
+const sideNav = document.getElementById("sideNav");
+const navLinks = document.querySelectorAll("#navList a");
+
+collapseBtn.addEventListener("click", () => {
+  sideNav.classList.toggle("closed");
+});
+
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    if (window.innerWidth < 820) {
+      sideNav.classList.add("closed");
+    }
+  });
+});
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 820) {
+    sideNav.classList.remove("closed");
+  }
+});
+</script>
+
+</body>
+</html>

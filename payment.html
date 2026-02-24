@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Your Free Trial • Cyber Eye</title>
+
+    <style>
+        /* ================= COLOR SETTINGS ================= */
+        :root {
+            --accent-teal: #00e6a8;
+            --accent-purple: #7c5cff;
+            --dark-bg: #05070a;
+            --glass-bg: rgba(22, 27, 34, 0.8);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1a1f2b 0%, var(--dark-bg) 100%);
+            color: #ffffff;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        /* ===== TITLE ===== */
+        .main-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .main-title h1 {
+            font-size: 38px;
+            background: linear-gradient(to right, var(--accent-teal), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(124, 92, 255, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .main-title p {
+            font-size: 16px;
+            color: #8892b0;
+        }
+
+        /* ===== LAYOUT ===== */
+        .wrapper {
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        /* ===== 3D GLASS CARD ===== */
+        .payment-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            width: 480px;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Neon Top Border */
+        .payment-box::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-teal), var(--accent-purple));
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab {
+            flex: 1;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+            color: #8892b0;
+        }
+
+        .tab.active {
+            border-color: var(--accent-purple);
+            color: white;
+            background: rgba(124, 92, 255, 0.15);
+            box-shadow: 0 0 15px rgba(124, 92, 255, 0.2);
+        }
+
+        /* Input Fields */
+        .field { margin-bottom: 20px; }
+        .field label {
+            font-size: 12px;
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+        }
+
+        .field input, .field select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+            background: #0d1117;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .field input:focus {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 12px rgba(0, 230, 168, 0.2);
+        }
+
+        .row { display: flex; gap: 15px; }
+
+        /* ===== 3D PURPLE BUTTON ===== */
+        .start-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(145deg, var(--accent-purple), #5a3edb);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 6px #452db1, 0 10px 20px rgba(124, 92, 255, 0.3);
+            transition: all 0.2s ease;
+            margin-top: 15px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px #452db1, 0 12px 25px rgba(124, 92, 255, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .start-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px #452db1;
+        }
+
+        .cancel-btn {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #667085;
+            margin-top: 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .cancel-btn:hover { color: var(--accent-teal); }
+
+        /* ===== SUMMARY SECTION (RIGHT) ===== */
+        .summary {
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .summary h3 { font-size: 22px; margin-bottom: 25px; color: #fff; }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            font-size: 16px;
+            color: #8892b0;
+        }
+
+        .total {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--accent-teal);
+            border-top: 1px solid #30363d;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .terms {
+            font-size: 13px;
+            color: #667085;
+            line-height: 1.7;
+            margin-top: 30px;
+        }
+
+        .terms a { color: var(--accent-purple); text-decoration: none; }
+        .terms a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media(max-width:900px){
+            .wrapper { flex-direction: column; align-items: center; }
+            .payment-box { width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main-title">
+    <h1>Activate Your Free Trial</h1>
+    <p>Experience the full power of Cyber Eye Premium</p>
+</div>
+
+<div class="wrapper">
+
+    <div class="payment-box">
+        <div class="tabs">
+            <div class="tab active">
+  <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 6px;">
+    <path fill="currentColor"
+      d="M20 4H4c-1.1 0-2 .9-2 2v12c0 
+      1.1.9 2 2 2h16c1.1 0 2-.9 
+      2-2V6c0-1.1-.9-2-2-2zm0 
+      4H4V6h16v2z"/>
+  </svg>
+  Secure Card
+</div>
+            <div class="tab">PayPal</div>
+        </div>
+
+        <div class="field">
+            <label>Card Number</label>
+            <input type="text" placeholder="1234 5678 1234 5678">
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <label>Expiry Date</label>
+                <input type="text" placeholder="MM / YY">
+            </div>
+            <div class="field">
+                <label>Security Code</label>
+                <input type="text" placeholder="CVC">
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Country</label>
+            <select>
+                <option>Pakistan</option>
+                <option>United States</option>
+                <option>United Kingdom</option>
+            </select>
+        </div>
+
+        <button class="start-btn">Start 7-Day Free Trial</button>
+        
+        <a href="home.html" target="_top" class="cancel-btn">← Back to Cyber Eye</a>
+    </div>
+
+    <div class="summary">
+        <h3>Order Summary</h3>
+
+        <div class="summary-row">
+            <span>Premium Monthly</span>
+            <strong>$9.99</strong>
+        </div>
+
+        <div class="summary-row">
+            <span>7-Day Trial Discount</span>
+            <span style="color: var(--accent-teal);">-$9.99</span>
+        </div>
+
+        <div class="summary-row total">
+            <span>Total Due Today</span>
+            <span>$0.00</span>
+        </div>
+
+        <p class="terms">
+            By clicking "Start 7-Day Free Trial", you agree to our 
+            <a href="home.html">Terms</a> and <a href="home.html">Privacy Policy</a>. 
+            No charges will be made today. You can cancel at any time to avoid the monthly subscription fee.
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>

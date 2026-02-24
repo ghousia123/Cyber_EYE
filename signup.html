@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="signup">
+
+<div class="main glass">
+    <div class="signup">
+        <form id="signupForm">
+            <label class="title">CREATE ACCOUNT</label>
+
+            <input type="text" name="username" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm" placeholder="Confirm Password" required>
+
+            <button type="submit">Sign Up</button>
+
+            <div class="or">OR</div>
+
+    <div class="social">
+ <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=1008828248070-iq41aifsucch3do29c6knmtul9abg90r.apps.googleusercontent.com&redirect_uri=http://localhost:8080/webproject/web2/home.html&response_type=token&scope=email%20profile&prompt=select_account" class="social-icon google">
+    <img src="google.png" alt="Google">
+</a>
+    <a href="https://www.facebook.com" target="_blank" class="social-icon facebook">
+        <img src="facebook.png" alt="Facebook">
+    </a>
+    <a href="https://www.twitter.com" target="_blank" class="social-icon twitter">
+        <img src="twitter.png" alt="Twitter">
+    </a>
+</div>
+
+
+
+
+            <p class="switch">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById("signupForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = this.username.value;
+    const email = this.email.value;
+    const password = this.password.value;
+    const confirm = this.confirm.value;
+
+    if(password !== confirm){
+        alert("Passwords do not match!");
+        return;
+    }
+
+    localStorage.setItem("userName", name);
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userPassword", password);
+
+    alert("Signup Successful!");
+    window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>

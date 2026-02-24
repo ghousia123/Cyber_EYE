@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Eye - Cisco 3D Lab Pro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root { --accent: #00e6a8; --bg: #0b0f13; --panel: rgba(17, 25, 33, 0.98); }
+        * { margin:0; padding:0; box-sizing:border-box; user-select: none; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); overflow: hidden; color: #fff; }
+
+        /* Instructions Overlay */
+        #guide-overlay { 
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95); 
+            display: flex; align-items: center; justify-content: center; z-index: 2000; 
+        }
+        .guide-content { 
+            background: #15222b; padding: 40px; border-radius: 12px; 
+            border: 1px solid var(--accent); max-width: 750px; width: 90%;
+        }
+        .guide-content h2 { color: var(--accent); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .guide-section { margin-bottom: 25px; }
+        .guide-section h3 { font-size: 16px; color: #fff; margin-bottom: 10px; border-left: 3px solid var(--accent); padding-left: 10px; text-transform: uppercase; }
+        .guide-content p { font-size: 14px; color: #ccc; line-height: 1.6; margin-bottom: 5px; }
+        .code-block { background: #000; color: #00ff88; padding: 12px; border-radius: 4px; margin: 10px 0; font-family: 'Courier New', monospace; display: block; border: 1px solid #222; }
+        .start-btn { width: 100%; padding: 15px; background: var(--accent); border: none; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: 10px; text-transform: uppercase; color: #000; }
+
+        /* UI Elements */
+        .ui { position: absolute; z-index: 100; }
+        #mode-selector { top:20px; left:50%; transform:translateX(-50%); display:flex; gap:10px; background:var(--panel); border-radius:8px; padding:6px; border:1px solid rgba(255,255,255,0.1); }
+        .mode-btn { padding:10px 20px; border-radius:4px; background:transparent; color:white; border:none; cursor:pointer; display: flex; align-items: center; gap: 8px; }
+        .mode-btn.active { background: var(--accent); color: #000; font-weight: bold; }
+
+        #palette { top:90px; left:20px; background:var(--panel); border-radius:8px; padding:15px; border:1px solid rgba(0,230,168,0.2); width: 100px; }
+        .dev-item { padding:12px; margin-bottom:12px; background:rgba(255,255,255,0.03); border-radius:4px; text-align:center; cursor:pointer; }
+        .dev-item i { font-size: 24px; color: var(--accent); margin-bottom: 5px; display: block; }
+
+        /* Terminal Window */
+        #floating-terminal { 
+            position: absolute; bottom: 40px; right: 20px; 
+            width: 650px; height: 450px; background: #050505; 
+            border: 1px solid #444; border-radius: 4px; 
+            display: none; flex-direction: column; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+        .term-header { padding:12px 15px; background:#1a1a1a; display:flex; justify-content:space-between; align-items: center; border-bottom: 1px solid #333;}
+        #term-out { flex:1; padding:15px; overflow-y:auto; color: #00ff41; font-family: 'Courier New', monospace; font-size:14px; white-space: pre-wrap; background: #000;}
+        .term-input-box { display:flex; padding:12px; background:#000; border-top: 1px solid #222; }
+        .prompt { color: #fff; font-weight: bold; margin-right: 8px; font-family: monospace; }
+        .term-input { flex:1; background:transparent; border:none; color:#fff; outline:none; font-family:monospace; font-size: 14px;}
+
+        #lab-controls { bottom:20px; left:20px; display:flex; gap:10px; }
+        .lab-btn { padding:10px 18px; border-radius:4px; border:none; cursor:pointer; background:#222; color:#eee; font-size: 12px; }
+        #canvas-container { width:100vw; height:100vh; }
+    </style>
+</head>
+<body>
+
+<div id="guide-overlay">
+    <div class="guide-content">
+        <h2>Cisco Lab User Instructions</h2>
+        
+        <div class="guide-section">
+            <h3>1. Router Configuration (Cisco IOS)</h3>
+            <div class="code-block">
+                en (Enable Mode)<br>
+                conf t (Global Config Mode)<br>
+                int fa0/0 (Select Interface)<br>
+                ip add [IP] [Mask] (Assign IP)<br>
+                no shut (Activate)
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>2. Routing & Connectivity</h3>
+            <p>To reach remote networks, use the static route command in config mode:</p>
+            <div class="code-block">ip route [Dest_Network] [Mask] [Next_Hop]</div>
+            <p>Example: <b>ip route 192.168.2.0 255.255.255.0 10.0.0.2</b></p>
+            <p>Then test connectivity with: <b>ping [IP]</b></p>
+        </div>
+
+        <button class="start-btn" onclick="document.getElementById('guide-overlay').remove()">Start Laboratory</button>
+    </div>
+</div>
+
+<div id="mode-selector" class="ui">
+    <button class="mode-btn active" id="btnSelect"><i class="fa-solid fa-mouse-pointer"></i> Select</button>
+    <button class="mode-btn" id="btnConnect"><i class="fa-solid fa-bolt"></i> Wire</button>
+</div>
+
+<div id="palette" class="ui">
+    <div class="dev-item" onclick="sim.addDevice('pc')"><i class="fa-solid fa-laptop"></i><small>PC</small></div>
+    <div class="dev-item" onclick="sim.addDevice('router')"><i class="fa-solid fa-server"></i><small>Router</small></div>
+    <div class="dev-item" onclick="sim.addDevice('switch')"><i class="fa-solid fa-network-wired"></i><small>Switch</small></div>
+</div>
+
+<div id="floating-terminal" class="ui">
+    <div class="term-header">
+        <span id="term-title" style="font-weight: bold; font-size: 11px; color: var(--accent);">CLI CONSOLE</span>
+        <button onclick="toggleTerminal()" style="background:#cc0000; border:none; color:white; padding:4px 12px; cursor:pointer; border-radius:2px;">CLOSE</button>
+    </div>
+    <div id="term-out"></div>
+    <div class="term-input-box">
+        <span class="prompt" id="term-prompt">Router></span>
+        <input type="text" class="term-input" id="term-input" autocomplete="off" spellcheck="false">
+    </div>
+</div>
+
+<div id="lab-controls" class="ui">
+    <button class="lab-btn" onclick="sim.saveLab()">Save Lab</button>
+    <button class="lab-btn" onclick="sim.loadLab()">Load Lab</button>
+</div>
+
+<div id="canvas-container"></div>
+
+<script>
+class Simulator {
+    constructor() {
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+        this.camera.position.set(20, 20, 20); this.camera.lookAt(0,0,0);
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("canvas-container").appendChild(this.renderer.domElement);
+
+        this.devices = []; this.links = []; this.mode = "select";
+        this.selectedObj = null; this.connectFrom = null;
+
+        this.scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+        this.scene.add(new THREE.GridHelper(100, 50, 0x00e6a8, 0x222222));
+
+        this.raycaster = new THREE.Raycaster();
+        this.mouse = new THREE.Vector2();
+        this.plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+
+        this.setupEvents();
+        this.animate();
+    }
+
+    addDevice(type, saved = null) {
+        let geo = (type === 'router') ? new THREE.CylinderGeometry(1.2, 1.2, 0.8, 32) : new THREE.BoxGeometry(2, 1.5, 0.5);
+        let color = (type === 'pc') ? 0x00d2ff : (type === 'router' ? 0xffcc00 : 0x00ff88);
+        const mesh = new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color }));
+        
+        mesh.position.set(Math.random()*10-5, 0.5, Math.random()*10-5);
+        mesh.userData = saved ? saved.userData : { 
+            type, hostname: type + Math.floor(Math.random()*10),
+            ip: "", mask: "", gateway: "", mode: "user", int: null, 
+            history: `--- ${type.toUpperCase()} Console Access ---`,
+            routes: [], // Array for static routes
+            isUp: false
+        };
+        if(saved) mesh.position.copy(saved.pos);
+
+        this.scene.add(mesh);
+        this.devices.push(mesh);
+    }
+
+    setupEvents() {
+        window.addEventListener('mousedown', (e) => {
+            if(e.target.tagName !== "CANVAS") return;
+            this.mouse.x = (e.clientX/window.innerWidth)*2-1;
+            this.mouse.y = -(e.clientY/window.innerHeight)*2+1;
+            this.raycaster.setFromCamera(this.mouse, this.camera);
+            const hits = this.raycaster.intersectObjects(this.devices);
+
+            if (hits.length > 0) {
+                const dev = hits[0].object;
+                if (this.mode === "select") { openTerminal(dev); this.selectedObj = dev; }
+                else if (this.mode === "connect") {
+                    if (!this.connectFrom) { this.connectFrom = dev; }
+                    else { this.createWire(this.connectFrom, dev); this.connectFrom = null; }
+                }
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (this.mode === "select" && this.selectedObj) {
+                this.mouse.x = (e.clientX/window.innerWidth)*2-1;
+                this.mouse.y = -(e.clientY/window.innerHeight)*2+1;
+                this.raycaster.setFromCamera(this.mouse, this.camera);
+                const pt = new THREE.Vector3();
+                this.raycaster.ray.intersectPlane(this.plane, pt);
+                this.selectedObj.position.set(pt.x, 0.5, pt.z);
+                this.updateWires();
+            }
+        });
+        window.addEventListener('mouseup', () => { this.selectedObj = null; });
+    }
+
+    createWire(a, b) {
+        if(a === b) return;
+        const geo = new THREE.BufferGeometry().setFromPoints([a.position, b.position]);
+        const line = new THREE.Line(geo, new THREE.LineBasicMaterial({ color: 0xcc0000 }));
+        line.userData = { a, b };
+        this.scene.add(line);
+        this.links.push(line);
+    }
+
+    updateWires() {
+        this.links.forEach(l => {
+            l.geometry.setFromPoints([l.userData.a.position, l.userData.b.position]);
+            if(l.userData.a.userData.isUp && l.userData.b.userData.isUp) {
+                l.material.color.setHex(0x00ff00);
+            } else {
+                l.material.color.setHex(0xcc0000);
+            }
+        });
+    }
+
+    saveLab() { localStorage.setItem("cyberLab_vFinal", JSON.stringify(this.devices.map(d=>({type:d.userData.type,pos:d.position,userData:d.userData})))); }
+    loadLab() {
+        const s = JSON.parse(localStorage.getItem("cyberLab_vFinal")); if(!s) return;
+        this.devices.forEach(d=>this.scene.remove(d)); this.devices=[];
+        this.links.forEach(l=>this.scene.remove(l)); this.links=[];
+        s.forEach(d=>this.addDevice(d.type, d));
+    }
+    animate() { requestAnimationFrame(()=>this.animate()); this.renderer.render(this.scene, this.camera); }
+}
+
+const sim = new Simulator();
+const termOut = document.getElementById("term-out");
+const termIn = document.getElementById("term-input");
+const termPrompt = document.getElementById("term-prompt");
+let activeDev = null;
+
+function openTerminal(dev) {
+    activeDev = dev;
+    document.getElementById("floating-terminal").style.display = "flex";
+    document.getElementById("term-title").innerText = dev.userData.hostname.toUpperCase() + " CLI CONSOLE";
+    termOut.innerHTML = dev.userData.history;
+    updateCLI();
+    termIn.focus();
+}
+
+function updateCLI() {
+    let u = activeDev.userData;
+    if(u.type === 'pc') {
+        termPrompt.innerText = "PC>";
+    } else {
+        let p = u.hostname;
+        if(u.mode === "privileged") p += "#";
+        else if(u.mode === "config") p += "(config)#";
+        else if(u.mode === "interface") p += `(config-if)#`;
+        else p += ">";
+        termPrompt.innerText = p;
+    }
+}
+
+function handlePing(targetIp) {
+    const target = sim.devices.find(d => d.userData.ip === targetIp);
+    if (target && target.userData.isUp) {
+        return `\nPinging ${targetIp} with 32 bytes of data:\nReply from ${targetIp}: bytes=32 time<1ms TTL=128\nReply from ${targetIp}: bytes=32 time<1ms TTL=128\nSuccess rate is 100 percent (4/4)`;
+    } else {
+        return `\nPinging ${targetIp} with 32 bytes of data:\nRequest timed out.\nRequest timed out.\nSuccess rate is 0 percent (0/4)`;
+    }
+}
+
+termIn.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && activeDev) {
+        let cmd = termIn.value.trim().toLowerCase();
+        let u = activeDev.userData;
+        let output = `\n${termPrompt.innerText} ${termIn.value}`;
+
+        if (cmd.startsWith("ping ")) {
+            output += handlePing(cmd.split(" ")[1]);
+        }
+        else if(u.type === 'pc') {
+            if(cmd.startsWith("ipconfig ")) {
+                let p = cmd.split(" ");
+                u.ip = p[1]; u.mask = p[2]; u.gateway = p[3];
+                u.isUp = true;
+                output += `\nApplied IP Configuration:\nIP Address: ${u.ip}\nSubnet Mask: ${u.mask}`;
+                sim.updateWires();
+            } else if(cmd === "ipconfig") {
+                output += `\nLocal Settings:\nIP: ${u.ip || "0.0.0.0"}\nMask: ${u.mask || "0.0.0.0"}`;
+            } else { output += "\nError: Invalid PC command."; }
+        } else {
+            if (cmd === "en") u.mode = "privileged";
+            else if (cmd === "conf t" && u.mode === "privileged") u.mode = "config";
+            else if (cmd.startsWith("ip route ") && u.mode === "config") {
+                let p = cmd.split(" ");
+                u.routes.push({ dest: p[2], mask: p[3], next: p[4] });
+                output += `\nStatic route added to ${p[2]}`;
+            }
+            else if (cmd.startsWith("int ") && u.mode === "config") {
+                u.mode = "interface"; u.int = cmd.split(" ")[1];
+                output += `\nSelected Interface: ${u.int}`;
+            }
+            else if (cmd.startsWith("ip add ") && u.mode === "interface") {
+                let p = cmd.split(" ");
+                u.ip = p[2]; u.mask = p[3];
+                output += `\nIP Address ${u.ip} assigned to interface.`;
+            }
+            else if (cmd === "no shut" && u.mode === "interface") {
+                u.isUp = true;
+                output += `\nInterface ${u.int} is now UP.`;
+                sim.updateWires();
+            }
+            else if (cmd === "show ip route") {
+                output += `\nCodes: C - connected, S - static\n\n`;
+                if(u.ip) output += `C    ${u.ip} is directly connected\n`;
+                u.routes.forEach(r => {
+                    output += `S    ${r.dest} via ${r.next}\n`;
+                });
+            }
+            else if (cmd === "exit") {
+                if(u.mode === "interface") u.mode = "config";
+                else if(u.mode === "config") u.mode = "privileged";
+                else u.mode = "user";
+            }
+            else { output += "\n% Invalid command or sequence."; }
+        }
+
+        u.history += output;
+        termOut.innerHTML = u.history;
+        termIn.value = "";
+        updateCLI();
+        termOut.scrollTop = termOut.scrollHeight;
+    }
+});
+
+function toggleTerminal() { document.getElementById("floating-terminal").style.display = "none"; activeDev = null; }
+document.getElementById("btnSelect").onclick = () => { sim.mode = "select"; updateBtns("btnSelect"); };
+document.getElementById("btnConnect").onclick = () => { sim.mode = "connect"; updateBtns("btnConnect"); };
+function updateBtns(id) { document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active")); document.getElementById(id).classList.add("active"); }
+</script>
+</body>
+</html>
